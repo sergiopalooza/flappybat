@@ -19,6 +19,9 @@ var mainState = {
 		game.physics.arcade.enable(this.bird);
 		this.bird.body.gravity.y = 1000;
 
+		//anchor point for bird image
+		this.bird.anchor.setTo(-0.2, 0.5);  
+
 		//calling jump when space is pressed
 		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		spaceKey.onDown.add(this.jump, this);
@@ -65,7 +68,7 @@ var mainState = {
 		if (this.bird.inWorld == false)
 			this.restartGame();
 
-		game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this);
+		game.physics.arcade.overlap(this.bird, this.pipes, this.hitPipe, null, this);
 
 		if (game.input.activePointer.isDown && !this.touched) {
 		this.touched = true;
@@ -76,13 +79,45 @@ var mainState = {
 		this.touched = false;
 		}
 
+		if(this.bird.angle < 20){ //falling bird rotation
+			this.bird.angle += 1;
+
+		}
+
 	},
 
 	//make the bird jump
 	jump: function(){
+
+		//prevent jumping of a dead bird
+		if (this.bird.alive == false)  
+    	return; 
+		
 		//adding hops to the bird
 		this.bird.body.velocity.y = -350;
 
+		var animation = game.add.tween(this.bird); //creating animation
+
+		animation.to({angle: -20}, 100);
+
+		animation.start();
+	},
+
+	hitPipe: function(){
+		//do nothing if bird already hit pipe
+
+		if(this.bird.alive == false)
+			return;
+		//kill bird
+		this.bird.alive = false;
+
+		//prevent pipes from appearing
+		game.time.events.remove(this.timer);
+
+		//stop all pipes from moving
+		this.pipes.forEachAlive(function(p){
+			p.body.velocity.x = 0;
+		}, this);
 	},
 
 	//restart the game
