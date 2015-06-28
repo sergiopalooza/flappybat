@@ -3,14 +3,19 @@ var game = new Phaser.Game(400,490, Phaser.CANVAS, 'gameDiv');
 
 var mainState = {
 	preload: function(){
-		game.stage.backgroundColor = '#71c5cf';
-        game.load.image('bird', 'assets/bird.png');  
+		game.stage.backgroundColor = '#c7a983';
+        game.load.image('bird', 'assets/batRight.png');  
         game.load.image('pipe', 'assets/pipe.png');
+        game.load.image("background", "assets/cave2.png");
+        //background = game.add.tileSprite(0, 0, 400, 490, "background");
+
 	},
 
 	create: function(){
 		// //set physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+
+		background = game.add.tileSprite(0, 0, 400, 490, "background");
 
 		//display bird
 		this.bird = this.game.add.sprite(100, 245, 'bird');
@@ -36,7 +41,7 @@ var mainState = {
 		this.score = 0;
 
 		this.labelScore = game.add.text(20, 20, "0", {font: "30px Arial", fill: "#ffffff"});
-		this.labelInstructions = game.add.text(100, 20, "Tap to jump!", {font: "30px Arial", fill: "#ffffff"});
+		this.labelInstructions = game.add.text(100, 20, "Tap to fly!", {font: "30px Arial", fill: "#ffffff"});
 
 },
 	addOnePipe: function(x,y){
