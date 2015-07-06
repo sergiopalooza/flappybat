@@ -3,9 +3,9 @@ var game = new Phaser.Game(400,490, Phaser.CANVAS, 'gameDiv');
 
 var mainState = {
 	preload: function(){
-		game.load.image('pipe', 'assets/rock.png');
-		game.stage.backgroundColor = '#c7a983';
-        game.load.image('bird', 'assets/batRight.png');  
+		game.stage.backgroundColor = '#c7a983';		
+        game.load.image('bird', 'assets/zubat.png');  
+ 		game.load.image('pipe', 'assets/rock.png');
         game.load.image("background", "assets/cave2.png");
         //background = game.add.tileSprite(0, 0, 400, 490, "background");
 
