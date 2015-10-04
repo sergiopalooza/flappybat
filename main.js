@@ -8,7 +8,6 @@ var mainState = {
  		game.load.image('pipe', 'assets/rock.png');
         game.load.image("background", "assets/cave2.png");
         //background = game.add.tileSprite(0, 0, 400, 490, "background");
-
 	},
 
 	create: function(){
@@ -42,8 +41,8 @@ var mainState = {
 
 		this.labelScore = game.add.text(20, 20, "0", {font: "30px Arial", fill: "#ffffff"});
 		this.labelInstructions = game.add.text(100, 20, "Tap to fly!", {font: "30px Arial", fill: "#ffffff"});
-
 },
+
 	addOnePipe: function(x,y){
 		var pipe = this.pipes.getFirstDead();//grab first unused pipe
 
